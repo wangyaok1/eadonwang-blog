@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户的需求，从来都不是他们说的那样 - Eadon Wang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray-light: #e5e5e5;
+            --color-gray-mid: #808080;
+            --color-accent: #00ff00;
+            --spacing-unit: 8px;
+            --font-primary: 'Noto Sans SC', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+        }
+
+        /* ========================================
+           基础设置
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* ========================================
+           Header Section
+           ======================================== */
+        header {
+            padding: 40px 0;
+            border-bottom: 2px solid var(--color-white);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-name {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-decoration {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-line {
+            width: 100px;
+            height: 2px;
+            background-color: var(--color-white);
+        }
+
+        .header-arrow {
+            font-family: var(--font-secondary);
+            font-size: 20px;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           Hero Section
+           ======================================== */
+        .hero {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-title-container {
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        /* 关键词样式 1: 空心文字 */
+        .hero-title .keyword-1 {
+            display: block;
+            font-size: 120px;
+            -webkit-text-stroke: 2px var(--color-white);
+            color: transparent;
+            margin-bottom: -20px;
+        }
+
+        /* 关键词样式 2: 霓虹绿背景高亮框 */
+        .hero-title .keyword-2 {
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 0 10px;
+            display: inline-block;
+        }
+
+        /* 关键词样式 3: 旋转文字 */
+        .hero-title .keyword-3 {
+            display: inline-block;
+            transform: rotate(-5deg);
+            font-size: 80px;
+        }
+
+        .hero-meta {
+            font-family: var(--font-secondary);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            display: flex;
+            gap: 30px;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-meta i {
+            color: var(--color-accent);
+        }
+
+        .hero-cover {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color-white);
+        }
+
+        .hero-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-family: var(--font-secondary);
+            font-size: 12px;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 5px 10px;
+            font-weight: 700;
+        }
+
+        .hero-cover-placeholder {
+            font-size: 12px;
+            color: #444;
+            text-align: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        /* ========================================
+           Content Section
+           ======================================== */
+        .content {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .content-sidebar {
+            border-right: 1px solid var(--color-gray-mid);
+            padding-right: 30px;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-gray-mid);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            font-family: var(--font-secondary);
+        }
+
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* 文章内部重复标题 */
+        .article-content h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content strong {
+            font-weight: 900;
+            color: var(--color-white);
+        }
+
+        .article-content em {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .article-content h2 {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 60px 0 30px 0;
+            letter-spacing: -1px;
+        }
+
+        .article-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--color-accent);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--color-gray-light);
+        }
+
+        /* 章节分隔线 */
+        .separator {
+            text-align: center;
+            color: var(--color-gray-mid);
+            margin: 40px 0;
+            font-size: 20px;
+            letter-spacing: 4px;
+        }
+
+        /* 高亮框样式 */
+        .highlight-box {
+            background-color: var(--color-white);
+            color: var(--color-black);
+            padding: 40px;
+            margin: 60px 0;
+            border: 2px solid var(--color-black);
+        }
+
+        .highlight-box h3 {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box p {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ========================================
+           Quotes Section
+           ======================================== */
+        .quotes-section {
+            margin: 80px 0;
+            padding: 60px 0;
+            border-top: 1px solid var(--color-gray-mid);
+            border-bottom: 1px solid var(--color-gray-mid);
+        }
+
+        .quotes-title {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 4px solid var(--color-accent);
+            letter-spacing: -0.5px;
+        }
+
+        .quote:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========================================
+           Footer Section
+           ======================================== */
+        footer {
+            padding: 60px 0;
+            border-top: 2px solid var(--color-white);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-date {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .footer-date span {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-gray-mid);
+            margin-top: 10px;
+            letter-spacing: 0;
+        }
+
+        .footer-info {
+            text-align: right;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            margin-bottom: 10px;
+        }
+
+        .footer-info a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* ========================================
+           Responsive Design
+           ======================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-title .keyword-1 {
+                font-size: 72px;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .content-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--color-gray-mid);
+                padding-right: 0;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-info {
+                text-align: left;
+                margin-top: 30px;
+            }
+
+            .footer-date {
+                font-size: 32px;
+            }
+        }
+
+        /* ========================================
+           Print Styles
+           ======================================== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .hero-title {
+                color: #000;
+            }
+
+            .article-content {
+                color: #000;
+            }
+
+            .article-content strong {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header-content">
+                <div class="author-name">Eadon Wang</div>
+                <div class="header-decoration">
+                    <div class="header-line"></div>
+                    <div class="header-arrow">→</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-title-container">
+                <h1 class="hero-title">
+                    
+                    <span class="keyword-1">客户的需求，从来都不是他们说的那样</span>
+                    
+                </h1>
+                <div class="hero-meta">
+                    <span><i>•</i> 56K</span>
+                    <span><i>•</i> 569 WORDS</span>
+                    <span><i>•</i> 2 MIN READ</span>
+                </div>
+            </div>
+            <div class="hero-cover">
+                
+                <div class="hero-cover-placeholder">[配图占位符]</div>
+                
+                <div class="hero-decoration">EXCLUSIVE</div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content">
+            <aside class="content-sidebar">
+                <h3 class="sidebar-title">Table of Contents</h3>
+                <ul class="sidebar-list">
+                    
+                    <li><a href="#表象背后-是恐惧" style="text-decoration: none; color: inherit;">表象背后，是恐惧</a></li>
+                    
+                    <li><a href="#你听到的是解决方案-不是问题" style="text-decoration: none; color: inherit;">你听到的是解决方案，不是问题</a></li>
+                    
+                    <li><a href="#真正的需求挖掘-是识别恐惧与机会" style="text-decoration: none; color: inherit;">真正的需求挖掘，是识别恐惧与机会</a></li>
+                    
+                    <li><a href="#如何识别真实的需要" style="text-decoration: none; color: inherit;">如何识别真实的需要</a></li>
+                    
+                </ul>
+            </aside>
+            <article class="article-content">
+                <!-- 文章内部重复标题 -->
+                <h1>客户的需求，从来都不是他们说的那样</h1>
+                
+                <!-- 文章内部目录（TOC） -->
+                
+                <h2>目录</h2>
+                
+                <p>1. [表象背后，是恐惧](#表象背后-是恐惧)</p>
+                
+                <p>2. [你听到的是解决方案，不是问题](#你听到的是解决方案-不是问题)</p>
+                
+                <p>3. [真正的需求挖掘，是识别恐惧与机会](#真正的需求挖掘-是识别恐惧与机会)</p>
+                
+                <p>4. [如何识别真实的需要](#如何识别真实的需要)</p>
+                
+                <p>---</p>
+                
+                
+                
+                    
+                        
+                        
+                            
+                            <p>一个客户找到你。</p>
+                            
+                        
+                            
+                            <p>他说他需要更高协作、更高质量的员工团队。</p>
+                            
+                        
+                            
+                            <p>你认真记录，准备推荐精英人才、搭建培训体系。</p>
+                            
+                        
+                            
+                            <p>等等。</p>
+                            
+                        
+                            
+                            <p>你深入沟通后发现，他实际招聘的，全是低学历、低认知水平的执行人员。</p>
+                            
+                        
+                            
+                            <p>矛盾出现了。</p>
+                            
+                        
+                            
+                            <p>他口口声声要高能力团队，为什么只招低水平员工？</p>
+                            
+                        
+                            
+                            <p>这不是他的错。</p>
+                            
+                        
+                            
+                            <p>这是他认知边界内的"正确答案"。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                    
+                        
+                        <h2 id="表象背后-是恐惧">表象背后，是恐惧</h2>
+                        
+                        
+                            
+                            <p>他的业务是服务型。</p>
+                            
+                        
+                            
+                            <p>服务型业务有个致命软肋：客户资源在员工手上。</p>
+                            
+                        
+                            
+                            <p>他怕员工带走客户，怕核心知识被学习。</p>
+                            
+                        
+                            
+                            <p>他不需要聪明人。</p>
+                            
+                        
+                            
+                            <p>他需要听话的执行者。</p>
+                            
+                        
+                            
+                            <p>他的真实需求不是"让员工变聪明"。</p>
+                            
+                        
+                            
+                            <p>而是"如何用AI解放自己"。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                    
+                        
+                        <h2 id="你听到的是解决方案-不是问题">你听到的是解决方案，不是问题</h2>
+                        
+                        
+                            
+                            <p>这是需求挖掘中最致命的陷阱。</p>
+                            
+                        
+                            
+                            <p>客户说的，永远是他们的"解决方案"。</p>
+                            
+                        
+                            
+                            <p>"我需要更好的团队"——这是他的解决方案。</p>
+                            
+                        
+                            
+                            <p>"我担心客户被带走，效率太低，品质不稳定"——这是他的问题。</p>
+                            
+                        
+                            
+                            <p>你直接执行他的解决方案，只会越走越远。</p>
+                            
+                        
+                            
+                            <p>你要做的是穿透表象，找到问题本身。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                    
+                        
+                        <h2 id="真正的需求挖掘-是识别恐惧与机会">真正的需求挖掘，是识别恐惧与机会</h2>
+                        
+                        
+                            
+                            <p>回到那个客户的案例。</p>
+                            
+                        
+                            
+                            <p>经过深度识别，他的真实诉求浮出水面：</p>
+                            
+                        
+                            
+                            <p>第一，用AI提升服务效率。</p>
+                            
+                        
+                            
+                            <p>第二，用AI提升服务品质。</p>
+                            
+                        
+                            
+                            <p>第三，用AI替换低效员工角色。</p>
+                            
+                        
+                            
+                            <p>这才是他需要的。</p>
+                            
+                        
+                            
+                            <p>他认知不到，因为他被恐惧蒙住了眼睛。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                    
+                        
+                        <h2 id="如何识别真实的需要">如何识别真实的需要</h2>
+                        
+                        
+                            
+                            <p>停止听"解决方案"。</p>
+                            
+                        
+                            
+                            <p>开始问"为什么"。</p>
+                            
+                        
+                            
+                            <p>当客户说"我需要X"，你要问：</p>
+                            
+                        
+                            
+                            <p>"为什么你需要X？"</p>
+                            
+                        
+                            
+                            <p>"如果没有X，会发生什么？"</p>
+                            
+                        
+                            
+                            <p>"X解决了你的什么问题？"</p>
+                            
+                        
+                            
+                            <p>一层层剥开。</p>
+                            
+                        
+                            
+                            <p>你会发现，他们说的，永远不是真相。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                            
+                            <p>真相藏在他们的恐惧里。</p>
+                            
+                        
+                            
+                            <p>藏在他们的机会里。</p>
+                            
+                        
+                            
+                            <p>藏在他们认知不到的地方。</p>
+                            
+                        
+                            
+                            <p>客户的需求，从来都不是他们说的那样。</p>
+                            
+                        
+                            
+                            <p>你要做的是看到那些他们自己都看不到的东西。</p>
+                            
+                        
+                            
+                            <div class="separator">---</div>
+                            
+                        
+                    
+                
+            </article>
+        </section>
+
+        <!-- Quotes Section -->
+        
+        <div class="quotes-section">
+            <div class="quotes-title">KEY INSIGHTS</div>
+            
+            <div class="quote">客户的需求，从来都不是他们说的那样</div>
+            
+            <div class="quote">真相藏在他们的恐惧里</div>
+            
+            <div class="quote">你要做的是看到那些他们自己都看不到的东西</div>
+            
+        </div>
+        
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-date">
+                    2026.01.22
+                    <span>PUBLISH DATE</span>
+                </div>
+                <div class="footer-info">
+                    <p>© 2024 Eadon Wang. All rights reserved.</p>
+                    <p><a href="#">WEBSITE</a> · <a href="#">TWITTER</a> · <a href="#">YOUTUBE</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
