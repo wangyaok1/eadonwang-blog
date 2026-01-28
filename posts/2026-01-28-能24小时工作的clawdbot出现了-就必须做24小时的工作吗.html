@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能24小时工作的Clawdbot出现了，就必须做24小时的工作吗？ - Eadon Wang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray-light: #e5e5e5;
+            --color-gray-mid: #808080;
+            --color-accent: #00ff00;
+            --color-bg: #FFFFF0;  /* 象牙白背景，护眼色 */
+            --color-text: #000000;  /* 黑色文字 */
+            --spacing-unit: 8px;
+            --font-primary: 'Noto Sans SC', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+        }
+
+        /* ========================================
+           基础设置
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* ========================================
+           Header Section
+           ======================================== */
+        header {
+            padding: 40px 0;
+            border-bottom: 2px solid var(--color-black);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-name {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-decoration {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-line {
+            width: 100px;
+            height: 2px;
+            background-color: var(--color-black);
+        }
+
+        .header-arrow {
+            font-family: var(--font-secondary);
+            font-size: 20px;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           Hero Section
+           ======================================== */
+        .hero {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-title-container {
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        /* 关键词样式 1: 空心文字 */
+        .hero-title .keyword-1 {
+            display: block;
+            font-size: 120px;
+            -webkit-text-stroke: 2px var(--color-black);
+            color: transparent;
+            margin-bottom: -20px;
+        }
+
+        /* 关键词样式 2: 霓虹绿背景高亮框 */
+        .hero-title .keyword-2 {
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 0 10px;
+            display: inline-block;
+        }
+
+        /* 关键词样式 3: 旋转文字 */
+        .hero-title .keyword-3 {
+            display: inline-block;
+            transform: rotate(-5deg);
+            font-size: 80px;
+        }
+
+        .hero-meta {
+            font-family: var(--font-secondary);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            display: flex;
+            gap: 30px;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-meta i {
+            color: var(--color-accent);
+        }
+
+        .hero-cover {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color-white);
+        }
+
+        .hero-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-family: var(--font-secondary);
+            font-size: 12px;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 5px 10px;
+            font-weight: 700;
+        }
+
+        .hero-cover-placeholder {
+            font-size: 12px;
+            color: #444;
+            text-align: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        /* ========================================
+           Content Section
+           ======================================== */
+        .content {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .content-sidebar {
+            border-right: 1px solid var(--color-gray-mid);
+            padding-right: 30px;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-gray-mid);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            font-family: var(--font-secondary);
+        }
+
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* 文章内部重复标题 */
+        .article-content h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content strong {
+            font-weight: 900;
+            color: var(--color-black);
+        }
+
+        .article-content em {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .article-content h2 {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 60px 0 30px 0;
+            letter-spacing: -1px;
+        }
+
+        .article-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--color-accent);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--color-gray-light);
+        }
+
+        /* 章节分隔线 */
+        .separator {
+            text-align: center;
+            color: var(--color-gray-mid);
+            margin: 40px 0;
+            font-size: 20px;
+            letter-spacing: 4px;
+        }
+
+        /* 高亮框样式 */
+        .highlight-box {
+            background-color: var(--color-white);
+            color: var(--color-black);
+            padding: 40px;
+            margin: 60px 0;
+            border: 2px solid var(--color-black);
+        }
+
+        .highlight-box h3 {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box p {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ========================================
+           Quotes Section
+           ======================================== */
+        .quotes-section {
+            margin: 80px 0;
+            padding: 60px 0;
+            border-top: 1px solid var(--color-gray-mid);
+            border-bottom: 1px solid var(--color-gray-mid);
+        }
+
+        .quotes-title {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 4px solid var(--color-accent);
+            letter-spacing: -0.5px;
+        }
+
+        .quote:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========================================
+           Footer Section
+           ======================================== */
+        footer {
+            padding: 60px 0;
+            border-top: 2px solid var(--color-white);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-date {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .footer-date span {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-gray-mid);
+            margin-top: 10px;
+            letter-spacing: 0;
+        }
+
+        .footer-info {
+            text-align: right;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            margin-bottom: 10px;
+        }
+
+        .footer-info a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* ========================================
+           Responsive Design
+           ======================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-title .keyword-1 {
+                font-size: 72px;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .content-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--color-gray-mid);
+                padding-right: 0;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-info {
+                text-align: left;
+                margin-top: 30px;
+            }
+
+            .footer-date {
+                font-size: 32px;
+            }
+        }
+
+        /* ========================================
+           Copy Button Styles (Hidden by default)
+           ======================================== */
+        .admin-tools {
+            display: none;
+        }
+
+        .copy-button {
+            background: none;
+            border: 2px solid var(--color-black);
+            color: var(--color-black);
+            padding: 8px 16px;
+            font-family: var(--font-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-button:hover {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .copy-button:active {
+            transform: scale(0.98);
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 15px 25px;
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+        }
+
+        /* ========================================
+           Print Styles
+           ======================================== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .hero-title {
+                color: #000;
+            }
+
+            .article-content {
+                color: #000;
+            }
+
+            .article-content strong {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header-content">
+                <div class="author-name">Eadon Wang</div>
+                <div class="header-decoration">
+                    <div class="admin-tools" id="adminTools">
+                        <button class="copy-button" onclick="copyToWeChat()">
+                            <span>📋</span>
+                            <span>复制到微信公众号</span>
+                        </button>
+                    </div>
+                    <div class="header-line"></div>
+                    <div class="header-arrow">→</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-title-container">
+                <h1 class="hero-title">
+                    
+                    <span class="keyword-1">能24小时工作的Clawdbot出现了，就必须做24小时的工作吗？</span>
+                    
+                </h1>
+                <div class="hero-meta">
+                    <span><i>•</i> 132K</span>
+                    <span><i>•</i> 1320 WORDS</span>
+                    <span><i>•</i> 4 MIN READ</span>
+                </div>
+            </div>
+            <div class="hero-cover">
+                
+                <img src="data:image/jpeg;base64,PGEgaHJlZj0iaHR0cHM6Ly9wMjYtY296ZS1zcGFjZS1zaWduLmJ5dGVpbWcuY29tL3Rvcy1jbi1pLWp2NTBjdGZleHgvNjdiZGZkZDM4OGM4NGFhNDhjNDQ4NjZkYzgzZWQ3NmN+dHBsdi1qdjUwY3RmZXh4LWNvbXByZXNzLXYyOnE5MC5qcGVnP2xrM3M9YjE0NDljOWUmYW1wO3gtZXhwaXJlcz0xODAxMTMwMjgwJmFtcDt4LXNpZ25hdHVyZT1SQUllTjR6a09mQlk5Y2NwNkZSN2lWQTV3cjAlM0QiPkZvdW5kPC9hPi4KCg==" alt="封面图">
+                
+                <div class="hero-decoration">EXCLUSIVE</div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content">
+            <aside class="content-sidebar">
+                <h3 class="sidebar-title">Table of Contents</h3>
+                <ul class="sidebar-list">
+                    
+                    <li><a href="#技术的承诺" style="text-decoration: none; color: inherit;">技术的承诺</a></li>
+                    
+                    <li><a href="#老板的逻辑" style="text-decoration: none; color: inherit;">老板的逻辑</a></li>
+                    
+                    <li><a href="#工具的异化" style="text-decoration: none; color: inherit;">工具的异化</a></li>
+                    
+                    <li><a href="#重新定义效率" style="text-decoration: none; color: inherit;">重新定义效率</a></li>
+                    
+                    <li><a href="#你的答案呢" style="text-decoration: none; color: inherit;">你的答案呢</a></li>
+                    
+                </ul>
+            </aside>
+            <article class="article-content">
+                <!-- 文章内部重复标题 -->
+                <h1>能24小时工作的Clawdbot出现了，就必须做24小时的工作吗？</h1>
+                
+                <!-- 文章内部目录（TOC） -->
+                
+                <h2>目录</h2>
+                
+                <p>1. [技术的承诺](#技术的承诺)</p>
+                
+                <p>2. [老板的逻辑](#老板的逻辑)</p>
+                
+                <p>3. [工具的异化](#工具的异化)</p>
+                
+                <p>4. [重新定义效率](#重新定义效率)</p>
+                
+                <p>5. [你的答案呢](#你的答案呢)</p>
+                
+                <p>---</p>
+                
+                
+                
+                    
+                        
+                        
+                            
+                            <p>一个矛盾的开始。</p>
+                            
+                        
+                            
+                            <p>你打开电脑，随时可以用Claude Code。但云端的Clawdbot可以24小时听候差遣。为什么你需要一个更方便、随时能工作的工具呢？<strong>因为你可以。</strong></p>
+                            
+                        
+                            
+                            <p>有没有觉得这很像老板的逻辑？明明8小时工作制就够了，为什么要员工加班、要员工随时oncall？<strong>因为这样可以完成更多事，赚更多钱。</strong></p>
+                            
+                        
+                            
+                            <p>但你不是老板。大多数人有了24小时工具，不会像老板那样扩大规模、赚更多钱。他们会做什么？<strong>他们会用这个工具反身压迫自己。</strong></p>
+                            
+                        
+                            
+                            <p>被迫思考更多任务，让自己处于更紧绷的状态。工具的存在，变成了对自己的积极性剥削。但最终，你可能什么收益都得不到。</p>
+                            
+                        
+                            
+                            <p><em>最先进的工具，最古老的陷阱。</em>这句话我要重复三遍。</p>
+                            
+                        
+                            
+                            <p><strong>最先进的工具，最古老的陷阱。</strong></p>
+                            
+                        
+                            
+                            <p><strong>最先进的工具，最古老的陷阱。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="技术的承诺">技术的承诺</h2>
+                        
+                        
+                            
+                            <p>工具从来都是这样。它们承诺让你更快、更高效、更自由。</p>
+                            
+                        
+                            
+                            <p>你看，Clawdbot在云端等你。24小时待命，随时可以工作。听起来很美对吧？<strong>你可以在任何时间、任何地点开始工作。</strong></p>
+                            
+                        
+                            
+                            <p>但你有没有想过，这句话的另一面是什么？</p>
+                            
+                        
+                            
+                            <p><strong>你可以在任何时间、任何地点被工作召唤。</strong></p>
+                            
+                        
+                            
+                            <p>技术给了你选择权，但选择权本身就是一种压力。当工具永远在那里时，你的大脑会自动开始计算：我现在不工作，是不是浪费了这个工具的能力？我现在不工作，是不是在偷懒？</p>
+                            
+                        
+                            
+                            <p><em>存在即召唤。</em>这种召唤是无声的，但无处不在。</p>
+                            
+                        
+                            
+                            <p><strong>存在即召唤。</strong></p>
+                            
+                        
+                            
+                            <p><strong>存在即召唤。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="老板的逻辑">老板的逻辑</h2>
+                        
+                        
+                            
+                            <p>你有没有发现？老板对员工的剥削逻辑，已经被你内化了。</p>
+                            
+                        
+                            
+                            <p>老板说：公司运转只需要8小时，但为什么要加班？因为这样可以完成更多事，赚更多钱。</p>
+                            
+                        
+                            
+                            <p>现在你对工具说：我只需要工作8小时，但为什么有了24小时工具就要用够24小时？因为这样可以完成更多事...等等，完成更多事给谁看？</p>
+                            
+                        
+                            
+                            <p>这就是问题的核心。</p>
+                            
+                        
+                            
+                            <p>老板剥削员工，是因为老板获得了收益——公司规模扩大、利润增加。<strong>剥削是有回报的。</strong></p>
+                            
+                        
+                            
+                            <p>但你剥削自己呢？你用24小时工具逼迫自己完成更多任务，这些任务的价值流向了哪里？<strong>大多时候，流向了虚无。</strong></p>
+                            
+                        
+                            
+                            <p>你完成了一个任务，又想到了三个新任务。你完成了一个项目，又看到了更多可能性。工具的存在，让可能性变得无限，但你的时间和精力是有限的。</p>
+                            
+                        
+                            
+                            <p><strong>无限的可能性，有限的精力。</strong>这个矛盾，就是焦虑的根源。</p>
+                            
+                        
+                    
+                        
+                        <h2 id="工具的异化">工具的异化</h2>
+                        
+                        
+                            
+                            <p>工具本该是人的延伸。但现在，人变成了工具的延伸。</p>
+                            
+                        
+                            
+                            <p>Clawdbot不会累，不会倦，不会需要休息。但你会。<strong>你不是机器。</strong></p>
+                            
+                        
+                            
+                            <p>但当你使用一个24小时待命的工具时，你的大脑会下意识地对齐工具的节奏。工具不需要休息，你会开始怀疑自己为什么需要休息。工具可以持续工作，你会开始觉得自己也应该持续工作。</p>
+                            
+                        
+                            
+                            <p>这就是异化。人本该是工具的主人，但现在工具定义了人的节奏。</p>
+                            
+                        
+                            
+                            <p><em>当工具永远在线时，你永远离线不了。</em></p>
+                            
+                        
+                            
+                            <p><strong>当工具永远在线时，你永远离线不了。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="重新定义效率">重新定义效率</h2>
+                        
+                        
+                            
+                            <p>所以，真正的效率是什么？</p>
+                            
+                        
+                            
+                            <p>不是在24小时内完成24小时的工作。<strong>而是在合适的时间，做合适的事。</strong></p>
+                            
+                        
+                            
+                            <p>24小时工具的存在，不是让你工作24小时。<strong>而是让你在需要的时候，可以选择在任何时间工作。</strong></p>
+                            
+                        
+                            
+                            <p>注意这个区别：选择权和强迫性。</p>
+                            
+                        
+                            
+                            <p>真正的效率，是当你在凌晨2点有了灵感时，有工具可以帮你捕捉。而不是说，因为有工具，所以你必须凌晨2点都在工作。</p>
+                            
+                        
+                            
+                            <p><strong>选择权在谁手里？</strong></p>
+                            
+                        
+                            
+                            <p>如果工具在那里，你就觉得必须用，那么工具在控制你。如果工具在那里，你想用就用、不想用就不用，那么你在控制工具。</p>
+                            
+                        
+                    
+                        
+                        <h2 id="你的答案呢">你的答案呢</h2>
+                        
+                        
+                            
+                            <p>Clawdbot出现了。这是一个事实。</p>
+                            
+                        
+                            
+                            <p>但问题不是Clawdbot能做什么。<strong>问题是：你想让它为你做什么？</strong></p>
+                            
+                        
+                            
+                            <p>24小时待命的工具，是帮你解放了时间，还是帮你制造了更多任务？是让你获得了更多自由，还是让你陷入了更深的焦虑？</p>
+                            
+                        
+                            
+                            <p>答案不在工具里。答案在你手里。</p>
+                            
+                        
+                            
+                            <p><strong>你可以用工具，也可以不用。你可以工作，也可以休息。</strong></p>
+                            
+                        
+                            
+                            <p>24小时工具存在，不代表你必须24小时工作。<strong>你可以不剥削自己。</strong></p>
+                            
+                        
+                            
+                            <p><em>真正的自由，不是拥有更多选择。而是敢于说不。</em></p>
+                            
+                        
+                            
+                            <p><strong>真正的自由，不是拥有更多选择。而是敢于说不。</strong></p>
+                            
+                        
+                            
+                            <p><strong>真正的自由，不是拥有更多选择。而是敢于说不。</strong></p>
+                            
+                        
+                    
+                
+            </article>
+        </section>
+
+        <!-- Quotes Section -->
+        
+        <div class="quotes-section">
+            <div class="quotes-title">KEY INSIGHTS</div>
+            
+            <div class="quote">存在即召唤</div>
+            
+            <div class="quote">最先进的工具，最古老的陷阱</div>
+            
+            <div class="quote">真正的自由，不是拥有更多选择。而是敢于说不</div>
+            
+        </div>
+        
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-date">
+                    2026.01.28
+                    <span>PUBLISH DATE</span>
+                </div>
+                <div class="footer-info">
+                    <p>© 2026 Eadon Wang. All rights reserved.</p>
+                    <p><a href="#">WEBSITE</a> · <a href="#">TWITTER</a> · <a href="#">YOUTUBE</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Copy Notification -->
+    <div id="copyNotification" class="copy-notification">
+        ✓ 已复制到剪贴板，可直接粘贴到微信公众号
+    </div>
+
+    <script>
+    // 检测 URL 参数，控制管理工具的显示
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'manage') {
+            const adminTools = document.getElementById('adminTools');
+            if (adminTools) {
+                adminTools.style.display = 'block';
+            }
+        }
+    })();
+
+    function copyToWeChat() {
+        try {
+            // 获取文章内容
+            const articleContent = document.querySelector('.article-content');
+            if (!articleContent) {
+                alert('未找到文章内容');
+                return;
+            }
+
+            // 转换为 Markdown 格式
+            let markdown = '';
+
+            // 遍历文章内容的子元素
+            const children = articleContent.children;
+            for (let i = 0; i < children.length; i++) {
+                const element = children[i];
+
+                if (element.tagName === 'H1') {
+                    // 主标题
+                    markdown += '# ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'H2') {
+                    // 二级标题
+                    markdown += '## ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'H3') {
+                    // 三级标题
+                    markdown += '### ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'P') {
+                    // 段落：转换粗体和斜体
+                    let paragraph = element.innerHTML.trim();
+                    // 转换 <strong> 为 Markdown 粗体
+                    paragraph = paragraph.replace(/<strong>/g, '**').replace(/<\/strong>/g, '**');
+                    // 转换 <em> 为 Markdown 斜体
+                    paragraph = paragraph.replace(/<em>/g, '*').replace(/<\/em>/g, '*');
+                    // 移除其他 HTML 标签（但保留链接）
+                    paragraph = paragraph.replace(/<(?!\/?a\b)[^>]*>/gi, '');
+                    // 转换 Markdown 链接 [text](url)
+                    paragraph = paragraph.replace(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>(.*?)<\/a>/gi, '[$3]($2)');
+                    // 移除多余的换行符
+                    paragraph = paragraph.replace(/\n+/g, ' ');
+                    markdown += paragraph + '\n\n';
+                } else if (element.tagName === 'DIV' && element.classList.contains('separator')) {
+                    // 分隔线
+                    markdown += '---\n\n';
+                }
+            }
+
+            // 移除末尾多余的空行
+            markdown = markdown.replace(/\n+$/, '\n');
+
+            // 复制到剪贴板
+            navigator.clipboard.writeText(markdown).then(function() {
+                // 显示成功提示
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动选择文章内容复制');
+            });
+
+        } catch (err) {
+            console.error('复制过程中出错:', err);
+            alert('复制失败，请手动选择文章内容复制');
+        }
+    }
+    </script>
+</body>
+</html>
