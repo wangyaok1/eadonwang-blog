@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如果你觉得你用的AI输出很平庸，那么这篇必读 - Eadon Wang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray-light: #e5e5e5;
+            --color-gray-mid: #808080;
+            --color-accent: #00ff00;
+            --color-bg: #FFFFF0;  /* 象牙白背景，护眼色 */
+            --color-text: #000000;  /* 黑色文字 */
+            --spacing-unit: 8px;
+            --font-primary: 'Noto Sans SC', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+        }
+
+        /* ========================================
+           基础设置
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* ========================================
+           Header Section
+           ======================================== */
+        header {
+            padding: 40px 0;
+            border-bottom: 2px solid var(--color-black);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-name {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-decoration {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-line {
+            width: 100px;
+            height: 2px;
+            background-color: var(--color-black);
+        }
+
+        .header-arrow {
+            font-family: var(--font-secondary);
+            font-size: 20px;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           Hero Section
+           ======================================== */
+        .hero {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-title-container {
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        /* 关键词样式 1: 空心文字 */
+        .hero-title .keyword-1 {
+            display: block;
+            font-size: 120px;
+            -webkit-text-stroke: 2px var(--color-black);
+            color: transparent;
+            margin-bottom: -20px;
+        }
+
+        /* 关键词样式 2: 霓虹绿背景高亮框 */
+        .hero-title .keyword-2 {
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 0 10px;
+            display: inline-block;
+        }
+
+        /* 关键词样式 3: 旋转文字 */
+        .hero-title .keyword-3 {
+            display: inline-block;
+            transform: rotate(-5deg);
+            font-size: 80px;
+        }
+
+        .hero-meta {
+            font-family: var(--font-secondary);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            display: flex;
+            gap: 30px;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-meta i {
+            color: var(--color-accent);
+        }
+
+        .hero-cover {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color-white);
+        }
+
+        .hero-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-family: var(--font-secondary);
+            font-size: 12px;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 5px 10px;
+            font-weight: 700;
+        }
+
+        .hero-cover-placeholder {
+            font-size: 12px;
+            color: #444;
+            text-align: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        /* ========================================
+           Content Section
+           ======================================== */
+        .content {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .content-sidebar {
+            border-right: 1px solid var(--color-gray-mid);
+            padding-right: 30px;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-gray-mid);
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            font-family: var(--font-secondary);
+        }
+
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* 文章内部重复标题 */
+        .article-content h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content strong {
+            font-weight: 900;
+            color: var(--color-black);
+        }
+
+        .article-content em {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .article-content h2 {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 60px 0 30px 0;
+            letter-spacing: -1px;
+        }
+
+        .article-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--color-accent);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--color-gray-light);
+        }
+
+        /* 章节分隔线 */
+        .separator {
+            text-align: center;
+            color: var(--color-gray-mid);
+            margin: 40px 0;
+            font-size: 20px;
+            letter-spacing: 4px;
+        }
+
+        /* 高亮框样式 */
+        .highlight-box {
+            background-color: var(--color-white);
+            color: var(--color-black);
+            padding: 40px;
+            margin: 60px 0;
+            border: 2px solid var(--color-black);
+        }
+
+        .highlight-box h3 {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box p {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ========================================
+           Quotes Section
+           ======================================== */
+        .quotes-section {
+            margin: 80px 0;
+            padding: 60px 0;
+            border-top: 1px solid var(--color-gray-mid);
+            border-bottom: 1px solid var(--color-gray-mid);
+        }
+
+        .quotes-title {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 4px solid var(--color-accent);
+            letter-spacing: -0.5px;
+        }
+
+        .quote:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========================================
+           Footer Section
+           ======================================== */
+        footer {
+            padding: 60px 0;
+            border-top: 2px solid var(--color-white);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-date {
+            font-family: var(--font-secondary);
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .footer-date span {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-gray-mid);
+            margin-top: 10px;
+            letter-spacing: 0;
+        }
+
+        .footer-info {
+            text-align: right;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--color-gray-mid);
+            margin-bottom: 10px;
+        }
+
+        .footer-info a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* ========================================
+           Responsive Design
+           ======================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-title .keyword-1 {
+                font-size: 72px;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .content-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--color-gray-mid);
+                padding-right: 0;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-info {
+                text-align: left;
+                margin-top: 30px;
+            }
+
+            .footer-date {
+                font-size: 32px;
+            }
+        }
+
+        /* ========================================
+           Copy Button Styles (Hidden by default)
+           ======================================== */
+        .admin-tools {
+            display: none;
+        }
+
+        .copy-button {
+            background: none;
+            border: 2px solid var(--color-black);
+            color: var(--color-black);
+            padding: 8px 16px;
+            font-family: var(--font-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-button:hover {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .copy-button:active {
+            transform: scale(0.98);
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 15px 25px;
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+        }
+
+        /* ========================================
+           Print Styles
+           ======================================== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .hero-title {
+                color: #000;
+            }
+
+            .article-content {
+                color: #000;
+            }
+
+            .article-content strong {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header-content">
+                <div class="author-name">Eadon Wang</div>
+                <div class="header-decoration">
+                    <div class="admin-tools" id="adminTools">
+                        <button class="copy-button" onclick="copyToWeChat()">
+                            <span>📋</span>
+                            <span>复制到微信公众号</span>
+                        </button>
+                    </div>
+                    <div class="header-line"></div>
+                    <div class="header-arrow">→</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-title-container">
+                <h1 class="hero-title">
+                    
+                    <span class="keyword-1">如果你觉得你用的AI输出很平庸，那么这篇必读</span>
+                    
+                </h1>
+                <div class="hero-meta">
+                    <span><i>•</i> 143K</span>
+                    <span><i>•</i> 1434 WORDS</span>
+                    <span><i>•</i> 5 MIN READ</span>
+                </div>
+            </div>
+            <div class="hero-cover">
+                
+                <img src="data:image/jpeg;base64,PGEgaHJlZj0iaHR0cHM6Ly9wMjYtY296ZS1zcGFjZS1zaWduLmJ5dGVpbWcuY29tL3Rvcy1jbi1pLWp2NTBjdGZleHgvZjRhNzg0MzMyMDc2NGVhYzkyYmVkNTc3NjQ3YjI4ZmN+dHBsdi1qdjUwY3RmZXh4LWNvbXByZXNzLXYyOnE5MC5qcGVnP2xrM3M9YjE0NDljOWUmYW1wO3gtZXhwaXJlcz0xODAyNDM2ODA2JmFtcDt4LXNpZ25hdHVyZT1EeUE1cUNHUFBpZzdPaUYlMkY0eGFlaVd2eWVLdyUzRCI+Rm91bmQ8L2E+LgoK" alt="封面图">
+                
+                <div class="hero-decoration">EXCLUSIVE</div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content">
+            <aside class="content-sidebar">
+                <h3 class="sidebar-title">Table of Contents</h3>
+                <ul class="sidebar-list">
+                    
+                    <li><a href="#输出为何平庸" style="text-decoration: none; color: inherit;">输出为何平庸</a></li>
+                    
+                    <li><a href="#三段式提问法" style="text-decoration: none; color: inherit;">三段式提问法</a></li>
+                    
+                    <li><a href="#从数据总结到战略分析" style="text-decoration: none; color: inherit;">从数据总结到战略分析</a></li>
+                    
+                    <li><a href="#从内容日历到系统思维" style="text-decoration: none; color: inherit;">从内容日历到系统思维</a></li>
+                    
+                    <li><a href="#什么时候用苏格拉底法" style="text-decoration: none; color: inherit;">什么时候用苏格拉底法</a></li>
+                    
+                    <li><a href="#你的下一次对话" style="text-decoration: none; color: inherit;">你的下一次对话</a></li>
+                    
+                </ul>
+            </aside>
+            <article class="article-content">
+                <!-- 文章内部重复标题 -->
+                <h1>如果你觉得你用的AI输出很平庸，那么这篇必读</h1>
+                
+                <!-- 文章内部目录（TOC） -->
+                
+                <h2>目录</h2>
+                
+                <p>1. [输出为何平庸](#输出为何平庸)</p>
+                
+                <p>2. [三段式提问法](#三段式提问法)</p>
+                
+                <p>3. [从数据总结到战略分析](#从数据总结到战略分析)</p>
+                
+                <p>4. [从内容日历到系统思维](#从内容日历到系统思维)</p>
+                
+                <p>5. [什么时候用苏格拉底法](#什么时候用苏格拉底法)</p>
+                
+                <p>6. [你的下一次对话](#你的下一次对话)</p>
+                
+                <p>---</p>
+                
+                
+                
+                    
+                        
+                        <h2 id="输出为何平庸">输出为何平庸</h2>
+                        
+                        
+                            
+                            <p>你有没有这种感觉？明明用的是最先进的AI，但结果总是一般般。你让它写篇文章，它给你一篇流水账。你让它分析数据，它给你一堆表面的总结。你让它给个营销策略，它给你一堆陈词滥调。</p>
+                            
+                        
+                            
+                            <p>你以为是AI的问题。其实不是。是你用AI的方式有问题。</p>
+                            
+                        
+                            
+                            <p>大多数人把AI当工具用。他们把AI当成一个会打字的实习生，一个能快速完成任务的外包。所以他们下达指令，要求结果。他们期待AI"完成"什么。</p>
+                            
+                        
+                            
+                            <p>但AI不是一个只会执行指令的机器。它是在数十亿个推理例子上训练出来的。它的本质是推理，不是执行。</p>
+                            
+                        
+                            
+                            <p>当你下达指令时，你激活的是它的执行模式。它优化速度，不追求深度。它给你一个看起来像样的答案，但不会真正思考问题。</p>
+                            
+                        
+                            
+                            <p><em>指令激活的是执行模式，问题激活的是推理模式。</em></p>
+                            
+                        
+                    
+                        
+                        <h2 id="三段式提问法">三段式提问法</h2>
+                        
+                        
+                            
+                            <p>OpenAI和Anthropic的工程师泄露了一个技巧。他们叫它"苏格拉底式提示法"。原理很简单：与其告诉AI做什么，不如问它问题。</p>
+                            
+                        
+                            
+                            <p>这个技巧的核心是三个部分。</p>
+                            
+                        
+                            
+                            <p><strong>第一，理论问题。</strong> 先问这个任务背后的原理是什么。比如你让AI写价值主张，先问"什么让价值主张对B2B买家有吸引力"。</p>
+                            
+                        
+                            
+                            <p><strong>第二，框架问题。</strong> 再问这里适用什么原则或框架。比如"它应该触发什么情感和逻辑触发点"。</p>
+                            
+                        
+                            
+                            <p><strong>第三，应用问题。</strong> 最后才让它具体应用。比如"现在将该框架应用于AI分析工具"。</p>
+                            
+                        
+                            
+                            <p>这样，AI被迫一步步推理。它先思考问题的本质，再考虑适用框架，最后才应用到你的具体任务。<strong>指令跳过推理，直接给出答案。</strong></p>
+                            
+                        
+                            
+                            <p><em>指令激活的是执行模式，问题激活的是推理模式。</em></p>
+                            
+                        
+                            
+                            <p><strong>指令激活的是执行模式，问题激活的是推理模式。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="从数据总结到战略分析">从数据总结到战略分析</h2>
+                        
+                        
+                            
+                            <p>看看这个例子。</p>
+                            
+                        
+                            
+                            <p>如果你直接说"分析这个客户反馈数据"，AI会怎么做？它会统计正面和负面评价的比例，列出高频词，给你一些表面的观察。这是数据总结，不是分析。</p>
+                            
+                        
+                            
+                            <p>但如果你问"客户反馈中的什么模式表明产品市场契合度问题？什么定性和定量信号最重要？现在通过这个角度分析这些数据，告诉我什么破裂了"。</p>
+                            
+                        
+                            
+                            <p>AI会怎么做？它会先思考产品市场契合度的理论框架，再考虑哪些信号最重要，最后带着这个视角分析你的数据。它变成了一个战略分析师，不是数据总结器。<strong>输出的质量，完全不同。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="从内容日历到系统思维">从内容日历到系统思维</h2>
+                        
+                        
+                            
+                            <p>再看看这个例子。</p>
+                            
+                        
+                            
+                            <p>如果你说"为LinkedIn创建内容日历"，AI会给你一个30天的计划，每天一个主题。这够用吗？可能够用。但它考虑过什么类型的参与度最高吗？考虑过发布频率避免观众疲劳吗？考虑过主题如何相互建立吗？</p>
+                            
+                        
+                            
+                            <p>没有。</p>
+                            
+                        
+                            
+                            <p>但如果你问"什么类型的LinkedIn内容在B2B SaaS中参与度最高？什么发布频率避免观众疲劳？主题应该如何相互建立？现在用这些原则设计一个30天的日历"。</p>
+                            
+                        
+                            
+                            <p>AI会先研究B2B SaaS在LinkedIn上什么内容效果好，再思考最佳发布频率，再设计主题的递进关系。最后才给你一个日历。</p>
+                            
+                        
+                            
+                            <p>这不是一个简单的任务。这是一个系统性的策略。<strong>AI从工具变成了战略伙伴。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="什么时候用苏格拉底法">什么时候用苏格拉底法</h2>
+                        
+                        
+                            
+                            <p>不是所有情况都需要苏格拉底式提问。</p>
+                            
+                        
+                            
+                            <p>简单的任务，直接指令就好。快速查询、数据格式化、基本代码生成、快速重写。这些场景不需要深度思考，直接下达指令更高效。</p>
+                            
+                        
+                            
+                            <p>但当你需要战略思考时，当你需要细致分析时，当你需要创意问题解决时，当你需要多步推理时，用苏格拉底式提问。</p>
+                            
+                        
+                            
+                            <p><strong>第一，别把AI当工具。把它当思考伙伴。</strong></p>
+                            
+                        
+                            
+                            <p><strong>第二，别只问结果。问它思考的过程。</strong></p>
+                            
+                        
+                            
+                            <p><strong>第三，别只看表面。挖掘背后的逻辑。</strong></p>
+                            
+                        
+                            
+                            <p><em>大多数人把AI当工具用，但真正厉害的人把AI当思考伙伴用。</em></p>
+                            
+                        
+                            
+                            <p><strong>大多数人把AI当工具用，但真正厉害的人把AI当思考伙伴用。</strong></p>
+                            
+                        
+                    
+                        
+                        <h2 id="你的下一次对话">你的下一次对话</h2>
+                        
+                        
+                            
+                            <p>今天就开始。把你下一个指令变成三个问题。</p>
+                            
+                        
+                            
+                            <p>不要说"写一篇关于AI生产力工具的博客文章"。问"什么样的AI生产力工具真正能提升生产力？它们解决了什么核心痛点？现在写一篇博客文章，回答这个问题"。</p>
+                            
+                        
+                            
+                            <p>不要说"为我的SaaS创建营销策略"。问"顶级增长营销人员在建立漏斗前会提什么问题？他们需要什么数据？他们首先会验证什么假设？现在回答我的SaaS产品的这些问题，然后设计漏斗"。</p>
+                            
+                        
+                            
+                            <p>不要说"分析这些数据并给我见解"。问"客户反馈中的什么模式表明产品市场契合度问题？什么定性和定量信号最重要？现在通过这个角度分析这些数据，告诉我什么破裂了"。</p>
+                            
+                        
+                            
+                            <p><strong>你从与ChatGPT搏斗，到进行实际的战略对话。这就是区别。</strong></p>
+                            
+                        
+                    
+                
+            </article>
+        </section>
+
+        <!-- Quotes Section -->
+        
+        <div class="quotes-section">
+            <div class="quotes-title">KEY INSIGHTS</div>
+            
+            <div class="quote">指令激活的是执行模式，问题激活的是推理模式</div>
+            
+            <div class="quote">大多数人把AI当工具用，但真正厉害的人把AI当思考伙伴用</div>
+            
+            <div class="quote">你从与ChatGPT搏斗，到进行实际的战略对话。这就是区别。</div>
+            
+        </div>
+        
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-date">
+                    2026.02.12
+                    <span>PUBLISH DATE</span>
+                </div>
+                <div class="footer-info">
+                    <p>© 2026 Eadon Wang. All rights reserved.</p>
+                    <p><a href="#">WEBSITE</a> · <a href="#">TWITTER</a> · <a href="#">YOUTUBE</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Copy Notification -->
+    <div id="copyNotification" class="copy-notification">
+        ✓ 已复制到剪贴板，可直接粘贴到微信公众号
+    </div>
+
+    <script>
+    // 检测 URL 参数，控制管理工具的显示
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'manage') {
+            const adminTools = document.getElementById('adminTools');
+            if (adminTools) {
+                adminTools.style.display = 'block';
+            }
+        }
+    })();
+
+    function copyToWeChat() {
+        try {
+            // 获取文章内容
+            const articleContent = document.querySelector('.article-content');
+            if (!articleContent) {
+                alert('未找到文章内容');
+                return;
+            }
+
+            // 转换为 Markdown 格式
+            let markdown = '';
+
+            // 遍历文章内容的子元素
+            const children = articleContent.children;
+            for (let i = 0; i < children.length; i++) {
+                const element = children[i];
+
+                if (element.tagName === 'H1') {
+                    // 主标题
+                    markdown += '# ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'H2') {
+                    // 二级标题
+                    markdown += '## ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'H3') {
+                    // 三级标题
+                    markdown += '### ' + element.textContent.trim() + '\n\n';
+                } else if (element.tagName === 'P') {
+                    // 段落：转换粗体和斜体
+                    let paragraph = element.innerHTML.trim();
+                    // 转换 <strong> 为 Markdown 粗体
+                    paragraph = paragraph.replace(/<strong>/g, '**').replace(/<\/strong>/g, '**');
+                    // 转换 <em> 为 Markdown 斜体
+                    paragraph = paragraph.replace(/<em>/g, '*').replace(/<\/em>/g, '*');
+                    // 移除其他 HTML 标签（但保留链接）
+                    paragraph = paragraph.replace(/<(?!\/?a\b)[^>]*>/gi, '');
+                    // 转换 Markdown 链接 [text](url)
+                    paragraph = paragraph.replace(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>(.*?)<\/a>/gi, '[$3]($2)');
+                    // 移除多余的换行符
+                    paragraph = paragraph.replace(/\n+/g, ' ');
+                    markdown += paragraph + '\n\n';
+                } else if (element.tagName === 'DIV' && element.classList.contains('separator')) {
+                    // 分隔线
+                    markdown += '---\n\n';
+                }
+            }
+
+            // 移除末尾多余的空行
+            markdown = markdown.replace(/\n+$/, '\n');
+
+            // 复制到剪贴板
+            navigator.clipboard.writeText(markdown).then(function() {
+                // 显示成功提示
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动选择文章内容复制');
+            });
+
+        } catch (err) {
+            console.error('复制过程中出错:', err);
+            alert('复制失败，请手动选择文章内容复制');
+        }
+    }
+    </script>
+</body>
+</html>
